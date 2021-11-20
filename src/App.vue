@@ -1,21 +1,33 @@
 <template>
   <div id="app">
-    <div class="columns">
-      <div class="column is-one-third is-offset-4">
-        <h1 class="title has-text-info has-text-centered is-light">
-          ระบบพิมพ์ใบประกาศนียบัตรเข้าร่วมงาน LA Forum 2021
-        </h1>
-        <h1 class="subtitle has-text-centered has-text-danger">
-          สภาเทคนิคการแพทย์
-        </h1>
-        <b-field label="กรุณากรอกหมายเลข ท.น.">
-          <b-input v-model="license"></b-input>
-        </b-field>
-        <b-field>
-          <b-button type="is-primary" @click="generate">
-            Create
-          </b-button>
-        </b-field>
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <img src="./assets/logo.jpg" width="150">
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-one-third is-offset-4">
+          <h1 class="title has-text-info has-text-centered is-light">
+            ระบบพิมพ์ใบเกียรติบัตรสำหรับผู้เข้าร่วมงาน LA Forum 2021
+          </h1>
+          <b-field label="หมายเลข ท.น.">
+            <b-input v-model="license"></b-input>
+          </b-field>
+          <b-field label="ชื่อ">
+            <b-input v-model="firstname"></b-input>
+          </b-field>
+          <b-field label="นามสกุล">
+            <b-input v-model="lastname"></b-input>
+          </b-field>
+          <b-field>
+            <div class="buttons is-centered">
+              <b-button type="is-primary" @click="generate" :disabled="isFormNotValid">
+                Create
+              </b-button>
+            </div>
+          </b-field>
+        </div>
       </div>
     </div>
   </div>
@@ -41,8 +53,17 @@ export default {
   },
   data () {
     return {
-      fullname: 'ลิขิต ปรียานนท์',
-      license: null,
+      firstname: '',
+      lastname: '',
+      license: '',
+    }
+  },
+  computed: {
+    fullname () {
+      return this.firstname + " " + this.lastname
+    },
+    isFormNotValid () {
+      return this.firstname === '' || this.lastname === ''
     }
   },
   methods: {
@@ -56,6 +77,9 @@ export default {
             },
             {
               text: 'สภาเทคนิคการแพทย์', fontSize: 18, alignment: 'center', lineHeight: 1.3
+            },
+            {
+              text: '*******สำหรับทดสอบเท่านั้น******', alignment: 'center', fontSize: 8, color: 'red'
             },
             {
               text: 'ขอมอบเกียรติบัตรฉบับนี้เพื่อแสดงว่า', fontSize: 15, alignment: 'center', lineHeight: 2
