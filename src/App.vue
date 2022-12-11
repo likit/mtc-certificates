@@ -9,10 +9,10 @@
       <div class="columns">
         <div class="column is-one-third is-offset-4">
           <h1 class="title has-text-info has-text-centered is-light">
-            ระบบพิมพ์ใบเกียรติบัตรสำหรับผู้เข้าร่วมงาน LA Forum 2021
+            ระบบพิมพ์ใบเกียรติบัตรสำหรับผู้เข้าร่วมงาน LA Forum 2022
           </h1>
-          <b-field label="หมายเลข ท.น.">
-            <b-input v-model="license"></b-input>
+          <b-field label="คำนำหน้า">
+            <b-input v-model="title"></b-input>
           </b-field>
           <b-field label="ชื่อ">
             <b-input v-model="firstname"></b-input>
@@ -40,10 +40,10 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 pdfMake.fonts = {
   Sarabun: {
-    normal: 'Sarabun-Regular.ttf',
-    bold: 'Sarabun-Bold.ttf',
-    italics: 'Sarabun-Italic.ttf',
-    bolditalics: 'Sarabun-BoldItalic.ttf'
+    normal: 'THSarabunNew.ttf',
+    bold: 'THSarabunNew Bold.ttf',
+    italics: 'THSarabunNew Italic.ttf',
+    bolditalics: 'THSarabunNew BoldItlic.ttf'
   }
 }
 
@@ -55,12 +55,12 @@ export default {
     return {
       firstname: '',
       lastname: '',
-      license: '',
+      title: '',
     }
   },
   computed: {
     fullname () {
-      return this.firstname + " " + this.lastname
+      return this.title + this.firstname + " " + this.lastname
     },
     isFormNotValid () {
       return this.firstname === '' || this.lastname === ''
@@ -76,34 +76,28 @@ export default {
               alignment: 'center'
             },
             {
-              text: 'สภาเทคนิคการแพทย์', fontSize: 18, alignment: 'center', lineHeight: 1.3
+              text: 'สภาเทคนิคการแพทย์', fontSize: 22, alignment: 'center', lineHeight: 1.3
             },
             {
-              text: '*******สำหรับทดสอบเท่านั้น******', alignment: 'center', fontSize: 8, color: 'red'
+              text: 'ขอมอบเกียรติบัตรฉบับนี้เพื่อแสดงว่า', fontSize: 21, alignment: 'center', lineHeight: 1.2 
             },
             {
-              text: 'ขอมอบเกียรติบัตรฉบับนี้เพื่อแสดงว่า', fontSize: 15, alignment: 'center', lineHeight: 2
+              text: this.fullname, fontSize: 28, alignment: 'center', lineHeight: 1, bold: true
             },
             {
-              text: this.fullname, fontSize: 17, alignment: 'center', lineHeight: 2, bold: true
+              text: 'ได้เข้าร่วมประชุมมหกรรมคุณภาพมาตรฐานห้องปฏิบัติการระดับชาติ ครั้งที่ 11 ประจำปี 2565', alignment: 'center', fontSize: 21, lineHeight: 1.0
             },
             {
-              text: 'ได้เข้าร่วมประชุมมหกรรมคุณภาพมาตรฐานห้องปฏิบัติการระดับชาติ ครั้งที่ 10 ประจำปี 2564', alignment: 'center', fontSize: 17, lineHeight: 1.2
+              text: '(11th Thailand LA Forum 2022)', alignment: 'center', fontSize: 21, lineHeight: 1.2
             },
             {
-              text: '(10th Thailand LA Forum 2021)', alignment: 'center', fontSize: 16, lineHeight: 2
+              text: '"ห้องปฏิบัติการคุณภาพที่ยั่งยืน (Sustainable Quality in Laboratory)"', alignment: 'center', bold: true, fontSize: 21, lineHeight: 1.2
             },
             {
-              text: 'ประชุมออนไลน์แบบเสมือนจริง (Virtual Conference)', alignment: 'center', lineHeight: 1.5, fontSize: 15
+              text: 'วันที่ 27 - 29 พฤศจิกายน 2565', alignment: 'center', lineHeight: 2, fontSize: 18
             },
             {
-              text: '"คุณภาพ...ท่ามกลางวิกฤติ" (Quality in Health Crisis)', alignment: 'center', bold: true, fontSize: 17, lineHeight: 2
-            },
-            {
-              text: 'วันที่ 20 - 21 พฤศจิกายน 2564', alignment: 'center', lineHeight: 2, fontSize: 16
-            },
-            {
-              text: 'จัดโดยสภาเทคนิคการแพทย์', alignment: 'center', lineHeight: 2, fontSize: 14
+              text: 'จัดโดยสภาเทคนิคการแพทย์', alignment: 'center', lineHeight: 2, fontSize: 18
             },
             {
               alignment: 'center',
@@ -111,10 +105,10 @@ export default {
               width: 70
             },
             {
-              text: '(นายสมชัย เจิดเสริมอนันต์)', alignment: 'center', fontSize: 15
+              text: '(นายสมชัย เจิดเสริมอนันต์)', alignment: 'center', fontSize: 18
             },
             {
-              text: 'นายกสภาเทคนิคการแพทย์', alignment: 'center', fontSize: 15
+              text: 'นายกสภาเทคนิคการแพทย์', alignment: 'center', fontSize: 18
             }
           ],
               defaultStyle: {
