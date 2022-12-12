@@ -7,23 +7,28 @@
         </div>
       </div>
       <div class="columns">
+        <div class="column">
+            <h1 class="title has-text-info has-text-centered is-light">
+              ระบบพิมพ์ใบเกียรติบัตรสำหรับผู้เข้าร่วมงาน LA Forum 2022
+            </h1>
+        </div>
+      </div>
+      <div class="columns">
         <div class="column is-one-third is-offset-4">
-          <h1 class="title has-text-info has-text-centered is-light">
-            ระบบพิมพ์ใบเกียรติบัตรสำหรับผู้เข้าร่วมงาน LA Forum 2022
-          </h1>
-          <b-field label="คำนำหน้า">
+          <b-field label="คำนำหน้า" message="คำนำหน้าจะปรากฎในประกาศนียบัตรตามที่ท่านระบุ">
             <b-input v-model="title"></b-input>
           </b-field>
-          <b-field label="ชื่อ">
+          <b-field label="ชื่อ" type="is-danger">
             <b-input v-model="firstname"></b-input>
           </b-field>
-          <b-field label="นามสกุล">
+          <b-field label="นามสกุล" type="is-danger">
             <b-input v-model="lastname"></b-input>
           </b-field>
           <b-field>
             <div class="buttons is-centered">
-              <b-button type="is-primary" @click="generate" :disabled="isFormNotValid">
-                Create
+              <b-button type="is-danger is-rounded" icon-left="download"
+                @click="generate" :disabled="isFormNotValid">
+              Download
               </b-button>
             </div>
           </b-field>
@@ -34,6 +39,8 @@
 </template>
 
 <script>
+import { db } from './firebase';
+import { query, where, collection, getDocs } from 'firebase/firestore'
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -67,7 +74,18 @@ export default {
     }
   },
   methods: {
-    generate () {
+    async generate () {
+        let ref = collection(db, 'participants')
+        let q = query(ref, where('firstname', '==', this.firstname), where('lastname', '==', this.lastname))
+        let querySnapshot = await getDocs(q)
+        let self = this
+        if (querySnapshot.docs.length == 0) {
+          this.$buefy.toast.open({
+            message: 'ไม่พบรายชื่อ กรุณาลองใหม่อีกครั้ง',
+            type: 'is-danger',
+          })
+          return
+        }
         let docDefinition = {
           content: [
             {
@@ -118,7 +136,13 @@ export default {
               pageOrientation: "landscape",
           pageMargins: [30, 20, 30, 30]
         }
-      pdfMake.createPdf(docDefinition).open()
+      pdfMake.createPdf(docDefinition).download(function() {
+        self.$buefy.dialog.alert({
+          title: 'Download Completed',
+          message: 'ดาวน์โหลดเรียบร้อย',
+          type: 'is-success',
+        })
+      })
     }
   }
 }
