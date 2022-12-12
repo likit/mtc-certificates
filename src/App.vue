@@ -97,10 +97,10 @@ export default {
               text: 'สภาเทคนิคการแพทย์', fontSize: 22, alignment: 'center', lineHeight: 1.3
             },
             {
-              text: 'ขอมอบเกียรติบัตรฉบับนี้เพื่อแสดงว่า', fontSize: 21, alignment: 'center', lineHeight: 1.2 
+              text: 'ขอมอบเกียรติบัตรฉบับนี้เพื่อแสดงว่า', fontSize: 21, alignment: 'center', lineHeight: 1.6 
             },
             {
-              text: this.fullname, fontSize: 28, alignment: 'center', lineHeight: 1, bold: true
+              text: this.fullname, fontSize: 28, alignment: 'center', lineHeight: 1.4, bold: true
             },
             {
               text: 'ได้เข้าร่วมประชุมมหกรรมคุณภาพมาตรฐานห้องปฏิบัติการระดับชาติ ครั้งที่ 11 ประจำปี 2565', alignment: 'center', fontSize: 21, lineHeight: 1.0
