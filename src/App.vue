@@ -106,7 +106,7 @@ export default {
               text: 'ได้เข้าร่วมประชุมมหกรรมคุณภาพมาตรฐานห้องปฏิบัติการระดับชาติ ครั้งที่ 11 ประจำปี 2565', alignment: 'center', fontSize: 21, lineHeight: 1.0
             },
             {
-              text: '(11th Thailand LA Forum 2022)', alignment: 'center', fontSize: 21, lineHeight: 1.2
+              text: ['(11', { text: 'th', sup: true }, ' Thailand LA Forum 2022)'], alignment: 'center', fontSize: 21, lineHeight: 1.2
             },
             {
               text: '"ห้องปฏิบัติการคุณภาพที่ยั่งยืน (Sustainable Quality in Laboratory)"', alignment: 'center', bold: true, fontSize: 21, lineHeight: 1.2
